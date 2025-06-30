@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "name": "ASP Identifier Ultra Plus Chain Handcuffs - Pink",
+      "url": "https://www.handcuffwarehouse.com/asp-identifier-ultra-plus-chain-handcuffs/",
+      "selectors": {
+        "out_of_stock": ".out-of-stock, .sold-out, .unavailable, .product-unavailable, [data-stock='0'], .stock-status.out, .backorder, .preorder, .variant-unavailable, .color-option:disabled, .size-option:disabled, option:disabled, .unavailable-option, .no-stock",
+        "in_stock": ".add-to-cart:not(:disabled), .buy-now:not(:disabled), .purchase-button:not(:disabled), .stock-status.in, [data-stock='1'], .product-available, .in-stock, .variant-available, .color-option:not(:disabled), .size-option:not(:disabled)"
+      },
+      "use_selenium": true
+    }
+  ],
+  "email": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "sender_email": "your-email@gmail.com",
+    "sender_password": "your-app-password",
+    "recipient_email": "your-email@gmail.com"
+  },
+  "schedule": {
+    "interval_hours": 168,
+    "check_time": "09:00"
+  }
+} 

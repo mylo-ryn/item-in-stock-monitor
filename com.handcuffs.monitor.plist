@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.handcuffs.monitor</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/Caskroom/miniconda/base/bin/python</string>
+        <string>/Users/mouse/src/item-in-stock-monitor/simple_handcuffs_monitor.py</string>
+    </array>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <true/>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/mouse/src/item-in-stock-monitor/handcuffs_monitor.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/mouse/src/item-in-stock-monitor/handcuffs_monitor_error.log</string>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/mouse/src/item-in-stock-monitor</string>
+    
+    <key>ProcessType</key>
+    <string>Background</string>
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/Caskroom/miniconda/base/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist> 
