@@ -2,6 +2,8 @@
 
 A Python-based web scraping tool that continuously monitors the availability of ASP Identifier Ultra Plus Chain Handcuffs color variants and sends email notifications when they come back in stock.
 
+June 2025
+
 ## 🔒 **Security Notice**
 
 ⚠️ **IMPORTANT**: This project contains sensitive email credentials. Before sharing or publishing:
