@@ -1,0 +1,39 @@
+🔗 Starting Simple ASP Handcuffs Monitor...
+⏰ Checking every 0.05 hours
+Press Ctrl+C to stop
+
+============================================================
+🔗 ASP Handcuffs Stock Check - 2025-07-02 08:12:27
+============================================================
+Item: ASP Identifier Ultra Plus Chain Handcuffs - Pink
+URL: https://www.handcuffwarehouse.com/asp-identifier-ultra-plus-chain-handcuffs/
+🔍 Checking ASP Identifier Ultra Plus Chain Handcuffs - Pink availability...
+✅ Found BCData script
+📋 Modifier values: "available_modifier_values":[]
+⚠️ No available modifier values found, checking other indicators...
+📋 Variant values: "available_variant_values":[]
+🔍 Full BCData excerpt:
+var BCData = {"product_attributes":{"sku":"ASP5606X","upc":null,"mpn":null,"gtin":null,"weight":null,"base":false,"image":null,"price":{"without_tax":{"formatted":"$65.60","value":65.6,"currency":"USD"},"tax_label":"Sales Tax"},"out_of_stock_behavior":"label_option","out_of_stock_message":"Out of stock","available_modifier_values":[],"available_variant_values":[],"in_stock_attributes":[],"selected_attributes":[],"stock":null,"instock":false,"stock_message":null,"purchasable":true,"purchasing_mes...
+❌ Product shows as not in stock
+Status: Product is not in stock
+Status unchanged
+============================================================
+
+
+============================================================
+🔗 ASP Handcuffs Stock Check - 2025-07-02 08:15:28
+============================================================
+Item: ASP Identifier Ultra Plus Chain Handcuffs - Pink
+URL: https://www.handcuffwarehouse.com/asp-identifier-ultra-plus-chain-handcuffs/
+🔍 Checking ASP Identifier Ultra Plus Chain Handcuffs - Pink availability...
+✅ Found BCData script
+📋 Modifier values: "available_modifier_values":[]
+⚠️ No available modifier values found, checking other indicators...
+📋 Variant values: "available_variant_values":[]
+🔍 Full BCData excerpt:
+var BCData = {"product_attributes":{"sku":"ASP5606X","upc":null,"mpn":null,"gtin":null,"weight":null,"base":false,"image":null,"price":{"without_tax":{"formatted":"$65.60","value":65.6,"currency":"USD"},"tax_label":"Sales Tax"},"out_of_stock_behavior":"label_option","out_of_stock_message":"Out of stock","available_modifier_values":[],"available_variant_values":[],"in_stock_attributes":[],"selected_attributes":[],"stock":null,"instock":false,"stock_message":null,"purchasable":true,"purchasing_mes...
+❌ Product shows as not in stock
+Status: Product is not in stock
+Status unchanged
+============================================================
+

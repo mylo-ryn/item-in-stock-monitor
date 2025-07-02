@@ -14,6 +14,7 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from bs4 import BeautifulSoup
 import os
+import sys
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -89,8 +90,8 @@ class SimpleHandcuffsMonitor:
                             
                             # Check if there are any available variants
                             if '[]' in modifier_section or 'available_modifier_values":[]' in modifier_section:
-                                print("❌ No available modifier values found")
-                                return False, "No color variants are currently available"
+                                print("⚠️ No available modifier values found, checking other indicators...")
+                                # Don't return False yet, check other indicators
                             else:
                                 # Extract the actual values
                                 import re
@@ -101,8 +102,9 @@ class SimpleHandcuffsMonitor:
                                         available_variants = [v.strip('"') for v in values_str.split(',') if v.strip()]
                                         print(f"✅ Available variants: {available_variants}")
                                     else:
-                                        print("❌ No available variants found")
-                                        return False, "No color variants are currently available"
+                                        print("⚠️ No available variants in modifier values, checking other indicators...")
+                                else:
+                                    print("⚠️ Could not parse modifier values, checking other indicators...")
                     
                     # Also check available_variant_values
                     if '"available_variant_values":[' in script_content:
@@ -111,6 +113,17 @@ class SimpleHandcuffsMonitor:
                         if end > start:
                             variant_section = script_content[start:end+1]
                             print(f"📋 Variant values: {variant_section}")
+                            
+                            # Check if there are available variants
+                            if '[]' not in variant_section:
+                                import re
+                                values_match = re.search(r'"available_variant_values":\[(.*?)\]', script_content)
+                                if values_match:
+                                    values_str = values_match.group(1)
+                                    if values_str.strip():
+                                        available_variants = [v.strip('"') for v in values_str.split(',') if v.strip()]
+                                        print(f"✅ Available variants from variant_values: {available_variants}")
+                                        return True, f"Color variants are available: {available_variants}"
                     
                     # Show the full BCData for debugging
                     print("🔍 Full BCData excerpt:")
@@ -120,7 +133,12 @@ class SimpleHandcuffsMonitor:
                         bcdata_excerpt = script_content[bcdata_start:bcdata_end]
                         print(bcdata_excerpt[:500] + "..." if len(bcdata_excerpt) > 500 else bcdata_excerpt)
                     
-                    # Also check instock status
+                    # Check for positive stock indicators
+                    if '"instock":true' in script_content:
+                        print("✅ Product shows as in stock")
+                        return True, "Product is in stock"
+                    
+                    # Check for negative stock indicators
                     if '"instock":false' in script_content:
                         print("❌ Product shows as not in stock")
                         return False, "Product is not in stock"
@@ -135,22 +153,29 @@ class SimpleHandcuffsMonitor:
             
             if not bcdata_found:
                 print("⚠️ BCData not found, falling back to HTML parsing...")
-                
-                # Fallback: Look for out of stock indicators in HTML
-                out_of_stock_indicators = [
-                    "out of stock",
-                    "sold out", 
-                    "unavailable",
-                    "backorder",
-                    "preorder",
-                    "currently unavailable"
-                ]
-                
-                page_text = soup.get_text().lower()
-                for indicator in out_of_stock_indicators:
-                    if indicator in page_text:
-                        print(f"❌ Found out of stock indicator: '{indicator}'")
-                        return False, f"Product shows as {indicator}"
+            
+            # Fallback: Look for color options in HTML
+            color_options = soup.find_all('option', string=lambda text: text and any(color in text.lower() for color in ['blue', 'gray', 'pink', 'yellow']))
+            if color_options:
+                available_colors = [option.get_text().strip() for option in color_options if option.get_text().strip()]
+                print(f"✅ Found color options in HTML: {available_colors}")
+                return True, f"Color variants are available: {available_colors}"
+            
+            # Look for out of stock indicators in HTML
+            out_of_stock_indicators = [
+                "out of stock",
+                "sold out", 
+                "unavailable",
+                "backorder",
+                "preorder",
+                "currently unavailable"
+            ]
+            
+            page_text = soup.get_text().lower()
+            for indicator in out_of_stock_indicators:
+                if indicator in page_text:
+                    print(f"❌ Found out of stock indicator: '{indicator}'")
+                    return False, f"Product shows as {indicator}"
             
             # If we found available variants, check if any are available
             if available_variants:
@@ -213,6 +238,7 @@ class SimpleHandcuffsMonitor:
         
         self.save_previous_status()
         print(f"{'='*60}\n")
+        sys.stdout.flush()
         return in_stock, message
     
     def send_notification(self, item, subject, message):
@@ -259,17 +285,20 @@ class SimpleHandcuffsMonitor:
         """Run the scheduler to check items periodically."""
         if not self.config:
             print("❌ Configuration not found. Please run setup_handcuffs.py first.")
+            sys.stdout.flush()
             return
             
         print("🔗 Starting Simple ASP Handcuffs Monitor...")
         print(f"⏰ Checking every {self.config['schedule']['interval_hours']} hours")
         print("Press Ctrl+C to stop")
+        sys.stdout.flush()
         
         # Schedule the job
         schedule.every(self.config['schedule']['interval_hours']).hours.do(self.check_item_stock)
         
         # Run initial check
         self.check_item_stock()
+        sys.stdout.flush()
         
         # Keep the script running
         while True:

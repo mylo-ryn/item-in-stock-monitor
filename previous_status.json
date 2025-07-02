@@ -2,6 +2,11 @@
   "ASP Identifier Ultra Plus Chain Handcuffs - Pink_https://www.handcuffwarehouse.com/asp-identifier-ultra-plus-chain-handcuffs/": {
     "in_stock": false,
     "message": "No color variants are currently available",
-    "last_checked": "2025-06-29T23:22:51.692313"
+    "last_checked": "2025-07-02T08:15:29.819205"
+  },
+  "ASP Identifier Ultra Plus Hinged Handcuffs_https://www.handcuffwarehouse.com/asp-identifier-ultra-plus-hinged-handcuffs/": {
+    "in_stock": true,
+    "message": "Color variants are available: ['842']",
+    "last_checked": "2025-07-02T07:51:22.902768"
   }
 }

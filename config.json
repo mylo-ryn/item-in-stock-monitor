@@ -18,7 +18,7 @@
     "recipient_email": "mylo.mbennett@gmail.com"
   },
   "schedule": {
-    "interval_hours": 168,
+    "interval_hours": 24,
     "check_time": "09:00"
   }
 } 
